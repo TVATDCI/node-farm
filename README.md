@@ -2,4 +2,4 @@
 
 ## I am working on setting up this project.
 
-### It is going be just very simple basic to learn node.js
+### It is going be just a little practice of basic node.js
