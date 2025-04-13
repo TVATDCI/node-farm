@@ -1,4 +1,6 @@
 // CommonJs recap
+// Synchronous
+// Blocking code execution
 const fs = require("fs");
 
 const textIn = fs.readFileSync("./txt/input.txt", "utf-8");
