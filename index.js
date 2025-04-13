@@ -14,7 +14,7 @@ console.log(`File written`);
     */
 }
 // You can register Asynchronous readFile function to read the task and use call back function to get the task back and execute it in Single Thread.
-
+// Non-Blocking Code
 // Call back Hell ASynchronous!
 
 const fs = require("fs");
@@ -34,3 +34,10 @@ const fs = require("fs");
 
      */
 }
+
+fs.readFile("./txt/start.txt", "utf-8", (err, data) => {
+  console.log(data);
+});
+console.log(
+  `Node.js will read data -read-this- in the background. \nSo it will read this line first`
+);
