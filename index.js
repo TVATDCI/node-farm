@@ -39,5 +39,5 @@ fs.readFile("./txt/start.txt", "utf-8", (err, data) => {
   console.log(data);
 });
 console.log(
-  `Node.js will read data -read-this- in the background. \nSo it will read this line first`
+  `Node.js will read data -read-this- in the background. \nSo it will read this line first and then the data below`
 );
