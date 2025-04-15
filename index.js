@@ -1,5 +1,6 @@
 const fs = require("fs");
 const http = require("http");
+const url = require("url");
 
 ////////////////////////////////
 // FILE
@@ -169,7 +170,7 @@ console.log(
 ///////////////////////////////////
 // SERVER
 const server = http.createServer((req, res) => {
-  // console.log(req); < reload the browser and check back in the terminal for request. All is there
+  console.log(req.url); // Checking for the / (url)
   res.end("Hello from the server!");
 });
 
