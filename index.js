@@ -118,6 +118,7 @@ console.log(
   `Node.js will read data -read-this- in the background. \nSo it will read this line first and then the data below`
 );
 
+// Suggested solution:
 // Refactoring with Promises (for readability)
 // Refactoring the code to avoid callback hell.
 // using Promises and async/await will make it much more readable.
