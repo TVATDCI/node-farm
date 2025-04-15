@@ -169,6 +169,7 @@ console.log(
 ///////////////////////////////////
 // SERVER
 const server = http.createServer((req, res) => {
+  // console.log(req); < reload the browser and check back in the terminal for request. All is there
   res.end("Hello from the server!");
 });
 
