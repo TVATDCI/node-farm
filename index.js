@@ -1,3 +1,9 @@
+const fs = require("fs");
+const http = require("http");
+
+////////////////////////////////
+// FILE
+
 // Synchronous
 // Blocking code execution
 {
@@ -15,8 +21,6 @@ console.log(`File written`);
 // You can register Asynchronous readFile function to read the task and use call back function to get the task back and execute it in Single Thread.
 // Non-Blocking Code
 // Call back Hell ASynchronous!
-
-const fs = require("fs");
 
 {
   /**
@@ -100,6 +104,8 @@ console.log(
 
 // Refactoring with Promises (for readability)
 // Refactoring the code to avoid callback hell, using Promises and async/await will make it much more readable.
+{
+  /** 
 
 fs.readFile("./txt/start.txt", "utf-8", (err, data1) => {
   fs.readFile(`./txt/${data1}.txt`, "utf-8", (err, data2) => {
@@ -117,6 +123,8 @@ fs.readFile("./txt/start.txt", "utf-8", (err, data1) => {
 console.log(
   `Node.js will read data -read-this- in the background. \nSo it will read this line first and then the data below`
 );
+*/
+}
 
 // Suggested solution:
 // Refactoring with Promises (for readability)
@@ -157,3 +165,13 @@ console.log(
 // Error Handling: The try-catch block handles errors from all asynchronous operations.
 
 // Async/Await: Using async/await makes it feel like synchronous code, while still being non-blocking.
+
+///////////////////////////////////
+// SERVER
+const server = http.createServer((req, res) => {
+  res.end("Hello from the server!");
+});
+
+server.listen(8000, "127.0.0.1", () => {
+  console.log("Listening to request on port 8000");
+});
