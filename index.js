@@ -168,10 +168,16 @@ console.log(
 // Async/Await: Using async/await makes it feel like synchronous code, while still being non-blocking.
 
 ///////////////////////////////////
-// SERVER
+// SERVER SETUP
+// Creates an HTTP server that listens to incoming requests and responds based on the requested URL path.
+// Using Node's built-in 'http' module — no external frameworks (like Express) yet!
+
 const server = http.createServer((req, res) => {
-  //console.log(req.url); // Checking for the / (url)
-  const pathName = req.url;
+  // req.url gives us the part of the URL after the domain and port.
+  // For example, if user visits: http://localhost:8000/overview → req.url === "/overview"
+
+  // ROUTING: Use conditional logic to serve different responses based on URL path
+  // Note: This is a basic routing system (manual). Later on, we can automate this with frameworks.
 
   if (pathName === "/" || pathName === "/overview") {
     res.end("This is OVERVIEW");
@@ -181,8 +187,15 @@ const server = http.createServer((req, res) => {
     res.end("API");
   } else {
     res.writeHead(404, {
-      // set status
-      "content-type": "text/html", // set content-type
+      // STATUS CODES:
+      // 200 – OK (default if you don't set it)
+      // 404 – Not Found → used when no matching route is found
+
+      // HEADERS:
+      // "Content-Type" tells the browser what kind of content it’s receiving (text, html, json, etc.)
+      // You can also set custom headers like "X-Custom-Header" for debugging or metadata
+
+      "content-type": "text/html",
       "header-name": "hello-world-this-is-my-own-header",
     });
     res.end(
