@@ -170,8 +170,23 @@ console.log(
 ///////////////////////////////////
 // SERVER
 const server = http.createServer((req, res) => {
-  console.log(req.url); // Checking for the / (url)
-  res.end("Hello from the server!");
+  //console.log(req.url); // Checking for the / (url)
+  const pathName = req.url;
+
+  if (pathName === "/" || pathName === "/overview") {
+    res.end("This is OVERVIEW");
+  } else if (pathName === "/product") {
+    res.end("This is the PRODUCT route");
+  } else {
+    res.writeHead(404, {
+      // set status
+      "content-type": "text/html", // set content-type
+      "header-name": "hello-world-this-is-my-own-header",
+    });
+    res.end(
+      "<h1>404 Page not found!</h1><p>By setting the content-type as text-html, you can add respond directly in html.</p><p>Inspect the page for all information for status, header-name and Header-content etc;.</p>"
+    );
+  }
 });
 
 server.listen(8000, "127.0.0.1", () => {
