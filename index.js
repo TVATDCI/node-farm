@@ -173,18 +173,35 @@ console.log(
 // Using Node's built-in 'http' module — no external frameworks (like Express) yet!
 
 const server = http.createServer((req, res) => {
+  console.log(`Incoming request: ${req.url}`); // 🎯 pointing the traffic!
   // req.url gives us the part of the URL after the domain and port.
   // For example, if user visits: http://localhost:8000/overview → req.url === "/overview"
 
   // ROUTING: Use conditional logic to serve different responses based on URL path
   // Note: This is a basic routing system (manual). Later on, we can automate this with frameworks.
+  const pathName = req.url;
 
   if (pathName === "/" || pathName === "/overview") {
     res.end("This is OVERVIEW");
   } else if (pathName === "/product") {
     res.end("This is the PRODUCT");
   } else if (pathName === "/api") {
-    res.end("API");
+    // __dirname gives the absolute path of the current directory (helps avoid relative path issues)
+    fs.readFile(`${__dirname}/dev-data/data.json`, "utf-8", (err, data) => {
+      if (err) {
+        console.log("Error reading API data:", err);
+        res.writeHead(500, { "Content-Type": "text/plain" });
+        return res.end("Internal Server Error");
+      }
+
+      // const productData = JSON.parse(data);
+      // console.log(productData);
+
+      // Tells the browser it's receiving JSON data
+      res.writeHead(200, { "Content-Type": "application/json" });
+
+      res.end(data);
+    });
   } else {
     res.writeHead(404, {
       // STATUS CODES:
