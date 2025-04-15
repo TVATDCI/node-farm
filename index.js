@@ -176,7 +176,9 @@ const server = http.createServer((req, res) => {
   if (pathName === "/" || pathName === "/overview") {
     res.end("This is OVERVIEW");
   } else if (pathName === "/product") {
-    res.end("This is the PRODUCT route");
+    res.end("This is the PRODUCT");
+  } else if (pathName === "/api") {
+    res.end("API");
   } else {
     res.writeHead(404, {
       // set status
