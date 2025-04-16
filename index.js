@@ -2,6 +2,14 @@ const fs = require("fs");
 const http = require("http");
 const url = require("url");
 
+// refactor from Async non-blocking to, top-level scope, Sync to avoid re-reading every time when the API gets the call!
+// NOTE: Only works better with static data!
+// Top-level: read JSON data once when the server starts
+const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
+//const productData = JSON.parse(data);
+//console.log(productData);
+// Open it for debugging purpose
+
 ////////////////////////////////
 // FILE
 
@@ -173,7 +181,7 @@ console.log(
 // Using Node's built-in 'http' module — no external frameworks (like Express) yet!
 
 const server = http.createServer((req, res) => {
-  console.log(`Incoming request: ${req.url}`); // 🎯 pointing the traffic!
+  console.log(`Incoming request🚦: ${req.url}`); // 🎯 pointing the traffic!
   // req.url gives us the part of the URL after the domain and port.
   // For example, if user visits: http://localhost:8000/overview → req.url === "/overview"
 
@@ -187,21 +195,19 @@ const server = http.createServer((req, res) => {
     res.end("This is the PRODUCT");
   } else if (pathName === "/api") {
     // __dirname gives the absolute path of the current directory (helps avoid relative path issues)
-    fs.readFile(`${__dirname}/dev-data/data.json`, "utf-8", (err, data) => {
-      if (err) {
-        console.log("Error reading API data:", err);
-        res.writeHead(500, { "Content-Type": "text/plain" });
-        return res.end("Internal Server Error");
-      }
+    // However, it is now moved to op-level scope, Sync to avoid re-reading every time when the API gets the call!
+    // fs.readFile(`${__dirname}/dev-data/data.json`, "utf-8", (err, data) => {
+    // if (err) {
+    //  console.log("Error reading API data:", err);
+    //  res.writeHead(500, { "Content-Type": "text/plain" });
+    //  return res.end("Internal Server Error");
+    // Tells the browser it's receiving JSON data
+    res.writeHead(200, { "Content-Type": "application/json" });
 
-      // const productData = JSON.parse(data);
-      // console.log(productData);
+    res.end(data); // Or `JSON.Stringify(productData)`
 
-      // Tells the browser it's receiving JSON data
-      res.writeHead(200, { "Content-Type": "application/json" });
-
-      res.end(data);
-    });
+    // const productData = JSON.parse(data);
+    // console.log(productData);
   } else {
     res.writeHead(404, {
       // STATUS CODES:
