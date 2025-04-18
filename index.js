@@ -3,10 +3,43 @@ const http = require("http");
 const url = require("url");
 
 // refactor from Async non-blocking to, top-level scope, Sync to avoid re-reading every time when the API gets the call!
+
+const replaceTemplate = (temp, product) => {
+  let productOutput = temp.replace(/{%PRODUCTNAME%}/g, product.productName);
+  productOutput = productOutput.replace(/{%IMAGE%}/g, product.image);
+  productOutput = productOutput.replace(/{%FROM%}/g, product.from);
+  productOutput = productOutput.replace(/{%NUTRIENTS%}/g, product.nutrients);
+  productOutput = productOutput.replace(/{%QUANTITY%}/g, product.quantity);
+  productOutput = productOutput.replace(/{%PRICE%}/g, product.price);
+  productOutput = productOutput.replace(
+    /{%DESCRIPTION%}/g,
+    product.description
+  );
+  productOutput = productOutput.replace(/{%ID%}/g, product.id);
+
+  // check if the product is organic
+  if (!product.organic)
+    productOutput = productOutput.replace(/{%NOT_ORGANIC%}/g, "not-organic");
+  return productOutput; // NOTE: Don't forget return the final output
+};
 // NOTE: Only works better with static data!
 // Top-level: read JSON data once when the server starts
+const tempOverview = fs.readFileSync(
+  `${__dirname}/templates/template-overview.html`,
+  "utf-8"
+);
+const tempCard = fs.readFileSync(
+  `${__dirname}/templates/template-card.html`,
+  "utf-8"
+);
+const tempProduct = fs.readFileSync(
+  `${__dirname}/templates/template-product.html`,
+  "utf-8"
+);
+
+// Read JSON data once when the server starts
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
-//const productData = JSON.parse(data);
+const productData = JSON.parse(data); // Parse JSON data into JavaScript object
 //console.log(productData);
 // Open it for debugging purpose
 
@@ -187,12 +220,26 @@ const server = http.createServer((req, res) => {
 
   // ROUTING: Use conditional logic to serve different responses based on URL path
   // Note: This is a basic routing system (manual). Later on, we can automate this with frameworks.
+
+  // Overview page
   const pathName = req.url;
 
   if (pathName === "/" || pathName === "/overview") {
-    res.end("This is OVERVIEW");
+    res.writeHead(200, { "Content-Type": "text/html" });
+
+    const cardsHtml = productData
+      .map((el) => replaceTemplate(tempCard, el))
+      .join(""); // and join them together into a single string
+    //console.log(cardsHtml);
+    const productOutput = tempOverview.replace("{%PRODUCT_CARD%}", cardsHtml);
+    // Finally respond to cardsHtml
+    res.end(productOutput); // Serve the overview page with product cards
+
+    // Product page
   } else if (pathName === "/product") {
     res.end("This is the PRODUCT");
+
+    // API endpoint
   } else if (pathName === "/api") {
     // __dirname gives the absolute path of the current directory (helps avoid relative path issues)
     // However, it is now moved to op-level scope, Sync to avoid re-reading every time when the API gets the call!
@@ -202,12 +249,15 @@ const server = http.createServer((req, res) => {
     //  res.writeHead(500, { "Content-Type": "text/plain" });
     //  return res.end("Internal Server Error");
     // Tells the browser it's receiving JSON data
+
     res.writeHead(200, { "Content-Type": "application/json" });
 
     res.end(data); // Or `JSON.Stringify(productData)`
 
     // const productData = JSON.parse(data);
     // console.log(productData);
+
+    // Not Found page
   } else {
     res.writeHead(404, {
       // STATUS CODES:
@@ -228,5 +278,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(8000, "127.0.0.1", () => {
-  console.log("Listening to request on port 8000");
+  console.log("Listening to request on port 8000 💆‍♀️ ");
 });

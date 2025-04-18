@@ -53,5 +53,93 @@
     "price": "2.00",
     "organic": false,
     "description": "Also known as maize, corn is one of the most popular cereal grains in the world. Popcorn and sweet corn are commonly eaten varieties, but refined corn products are also widely consumed, frequently as ingredients in foods. These include tortillas, tortilla chips, polenta, cornmeal, corn flour, corn syrup, and corn oil. Whole-grain corn is as healthy as any cereal grain, rich in fiber and many vitamins, minerals, and antioxidants."
+  },
+  {
+    "id": "5",
+    "productName": "Organic Apple",
+    "image": "🍎",
+    "from": "Italy",
+    "nutrients": "Vitamins A, C",
+    "quantity": "1kg",
+    "price": "3.99",
+    "description": "Fresh organic apples.",
+    "organic": true
+  },
+  {
+    "id": "6",
+    "productName": "Banana",
+    "image": "🍌",
+    "from": "Ecuador",
+    "nutrients": "Potassium",
+    "quantity": "1kg",
+    "price": "2.49",
+    "description": "Sweet bananas.",
+    "organic": false
+  },
+  {
+    "id": 7,
+    "productName": "Tomatoes",
+    "image": "🍅",
+    "from": "Italy",
+    "nutrients": "Vitamin C, Lycopene",
+    "quantity": "500g",
+    "price": "3.25",
+    "organic": true,
+    "description": "Cherry tomatoes are small, round, and bursting with flavor. They're a perfect snack or salad addition, packed with antioxidants and vitamins."
+  },
+  {
+    "id": 8,
+    "productName": "Grapes",
+    "image": "🍇",
+    "from": "Greece",
+    "nutrients": "Vitamin C, Vitamin K",
+    "quantity": "1kg",
+    "price": "4.99",
+    "organic": false,
+    "description": "Crisp and refreshing green grapes, perfect for snacking or pairing with cheese. Loaded with antioxidants and hydration power."
+  },
+  {
+    "id": 9,
+    "productName": "Pumpkin",
+    "image": "🎃",
+    "from": "USA",
+    "nutrients": "Beta-carotene, Fiber",
+    "quantity": "1 whole",
+    "price": "7.00",
+    "organic": true,
+    "description": "A seasonal favorite packed with nutrients and flavor. Great for soups, pies, and roasting. Also makes a cool Halloween decoration!"
+  },
+  {
+    "id": 10,
+    "productName": "Zucchini",
+    "image": "🥒",
+    "from": "Italy",
+    "nutrients": "Vitamin C, Manganese",
+    "quantity": "500g",
+    "price": "2.50",
+    "organic": true,
+    "description": "Zucchini is a summer squash that is typically green in color. It is low in calories and high in nutrients, making it a great addition to any meal. Zucchini can be eaten raw, grilled, roasted, or sautéed."
+  },
+  {
+    "id": 11,
+    "productName": "Eggplant",
+    "image": "🍆",
+    "from": "Turkey",
+    "nutrients": "Fiber, Antioxidants",
+    "quantity": "1 whole",
+    "price": "3.00",
+    "organic": false,
+    "description": "Eggplant, also known as aubergine, is a versatile vegetable that can be used in a variety of dishes. It is low in calories and high in fiber, making it a healthy choice for any meal."
+  },
+  {
+    "id": 12,
+    "productName": "Bell Peppers",
+    "image": "🌶️",
+    "from": "Thailand",
+    "nutrients": "Vitamin C, Vitamin A",
+    "quantity": "500g",
+    "price": "4.00",
+    "organic": true,
+    "description": "Bell peppers are sweet, crunchy vegetables that come in a variety of colors. They are rich in vitamins and antioxidants, making them a healthy addition to any meal."
   }
 ]
