@@ -4,7 +4,7 @@ Here’s a beginner-friendly `README.md` file for your project. It explains the 
 
 ---
 
-## Node.js Beginner Project: Basic Product Overview and Details
+## Beginner friendly:
 
 This project is a beginner-friendly implementation of a basic Node.js server that serves a product overview page and prepares for product detail pages. It demonstrates how to use Node.js to read files, serve HTML templates, and handle basic routing without any external frameworks.
 
