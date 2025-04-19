@@ -133,16 +133,38 @@ Here’s an example of the product data used in this project:
 - **Error Handling**: See examples of error handling in both synchronous and asynchronous file operations.
 - **Refactoring**: Explore alternative approaches (e.g., Promises, async/await) for better readability and maintainability.
 
----
-
-## Next Steps
-
 - **Product Details**: Implement the `/product` route to display detailed information about a single product.
-- **Styling**: Add CSS to improve the appearance of the pages.
+
 - **Templating Engines**: Experiment with templating engines like EJS, Pug, or Handlebars for more advanced templating.
 - **Dynamic Data**: Replace the static JSON file with a database (e.g., MongoDB, MySQL) for dynamic data handling.
+- **ES6 Modules** (coming soon): Transition the codebase to use modern JavaScript syntax and ES6 module structure for better scalability and maintainability.
 
 ---
+
+## 🚧 Current Development: feature/modules Branch
+
+As the foundational features of the project are now in place, development is moving forward in a cleaner, modular, and more scalable direction in a dedicated branch: feature/modules.
+
+**What’s new in feature/modules?**
+🔄 Code Refactoring: The index.js file has been cleaned up for better readability and maintainability.
+
+🧼 **Removed Comment Clutter:** Unnecessary or outdated comments were removed to streamline the learning experience.
+
+🧠 **Modular Functions:** Key features like templating, routing, and response handling have been broken into clear, concise modules.
+
+✨ **Improved Readability:** Cleaner variable and function names, organized file structure, and streamlined logic.
+
+📦 **ES6 Modules Transition (Planned):** Moving towards ES6 import/export syntax to embrace modern JavaScript standards.
+
+This branch maintains educational clarity while introducing best practices for cleaner production-ready code.
+
+---
+
+If you're curious to compare the beginner-friendly approach with a more refined modular structure, simply switch to the branch:
+
+```bash
+git checkout feature/modules
+```
 
 ## Acknowledgments
 
