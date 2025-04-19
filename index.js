@@ -215,8 +215,8 @@ console.log(
 
 const server = http.createServer((req, res) => {
   console.log(`Incoming request🚦: ${req.url}`); // 🎯 pointing the traffic!
-  console.log(req.url);
-  console.log(url.parse(req.url, true));
+  //console.log(req.url); // debugging purpose
+  //console.log(url.parse(req.url, true)); // query string parsing by url module and true to parse the query string into an object, product?id={%ID%}
   // req.url gives us the part of the URL after the domain and port.
   // For example, if user visits: http://localhost:8000/overview → req.url === "/overview"
 
@@ -224,9 +224,10 @@ const server = http.createServer((req, res) => {
   // Note: This is a basic routing system (manual). Later on, we can automate this with frameworks.
 
   // Overview page
-  const pathName = req.url;
+  // Adding a query and pathname to the URL
+  const { query, pathname } = url.parse(req.url, true);
 
-  if (pathName === "/" || pathName === "/overview") {
+  if (pathname === "/" || pathname === "/overview") {
     res.writeHead(200, { "Content-Type": "text/html" });
 
     const cardsHtml = productData
@@ -238,11 +239,12 @@ const server = http.createServer((req, res) => {
     res.end(productOutput); // Serve the overview page with product cards
 
     // Product page
-  } else if (pathName === "/product") {
+  } else if (pathname === "/product") {
+    console.log(query); // Object { id: '0' }
     res.end("This is the PRODUCT");
 
     // API endpoint
-  } else if (pathName === "/api") {
+  } else if (pathname === "/api") {
     // __dirname gives the absolute path of the current directory (helps avoid relative path issues)
     // However, it is now moved to op-level scope, Sync to avoid re-reading every time when the API gets the call!
     // fs.readFile(`${__dirname}/dev-data/data.json`, "utf-8", (err, data) => {
