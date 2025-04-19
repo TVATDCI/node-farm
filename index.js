@@ -1,6 +1,8 @@
 const fs = require("fs");
 const http = require("http");
+const { register } = require("module");
 const url = require("url");
+const { Z_RLE } = require("zlib");
 
 // refactor from Async non-blocking to, top-level scope, Sync to avoid re-reading every time when the API gets the call!
 
@@ -215,6 +217,8 @@ console.log(
 
 const server = http.createServer((req, res) => {
   console.log(`Incoming request🚦: ${req.url}`); // 🎯 pointing the traffic!
+  console.log(req.url);
+  console.log(url.parse(req.url, true));
   // req.url gives us the part of the URL after the domain and port.
   // For example, if user visits: http://localhost:8000/overview → req.url === "/overview"
 
