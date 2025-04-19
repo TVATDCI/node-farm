@@ -1,8 +1,6 @@
 const fs = require("fs");
 const http = require("http");
-const { register } = require("module");
 const url = require("url");
-const { Z_RLE } = require("zlib");
 
 // refactor from Async non-blocking to, top-level scope, Sync to avoid re-reading every time when the API gets the call!
 
