@@ -225,6 +225,7 @@ const server = http.createServer((req, res) => {
 
   // Overview page
   // Adding a query and pathname to the URL
+  // Destructuring method!
   const { query, pathname } = url.parse(req.url, true);
 
   if (pathname === "/" || pathname === "/overview") {
@@ -235,13 +236,17 @@ const server = http.createServer((req, res) => {
       .join(""); // and join them together into a single string
     //console.log(cardsHtml);
     const productOutput = tempOverview.replace("{%PRODUCT_CARD%}", cardsHtml);
-    // Finally respond to cardsHtml
+    // Finally respond to cardsHtml to productOutput
     res.end(productOutput); // Serve the overview page with product cards
 
     // Product page
   } else if (pathname === "/product") {
-    console.log(query); // Object { id: '0' }
-    res.end("This is the PRODUCT");
+    //console.log(query); // Debugging Object { id: '0' }
+    res.writeHead(200, { "Content-Type": "text/html" });
+    const product = productData[query.id];
+    const productOutput = replaceTemplate(tempProduct, product);
+
+    res.end(productOutput);
 
     // API endpoint
   } else if (pathname === "/api") {
@@ -282,5 +287,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(8000, "127.0.0.1", () => {
-  console.log("Listening to request on port 8000 💆‍♀️ ");
+  console.log("Listening to request on port 8000 💆‍♀️");
 });
