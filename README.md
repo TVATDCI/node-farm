@@ -141,10 +141,6 @@ Here’s an example of the product data used in this project:
 
 ---
 
-## 🚧 Current Development: feature/modules Branch
-
-As the foundational features of the project are now in place, development is moving forward in a cleaner, modular, and more scalable direction in a dedicated branch: feature/modules.
-
 **What’s new in feature/modules?**
 🔄 Code Refactoring: The index.js file has been cleaned up for better readability and maintainability.
 
@@ -166,11 +162,43 @@ If you're curious to compare the beginner-friendly approach with a more refined 
 git checkout feature/modules
 ```
 
+## 🚧 Current Development: feature/npm
+
+This branch introduces essential project setup improvements with `npm` and dev tools.
+
+### ✅ What's Done
+
+- Initialized `npm` and created a `package.json` file.
+- Installed [`slugify`](https://www.npmjs.com/package/slugify) for cleaner, URL-friendly strings (e.g., product slugs).
+- Installed `nodemon` as a **dev dependency** for hot reloading during development.
+- Created `.gitignore` to prevent `node_modules`, `.log` files, and other untracked files from being committed.
+
+### 💡 Why It Matters
+
+- **Modular Development**: Keeps project dependencies well-organized.
+- **Improved Dev Workflow**: `nodemon` auto-restarts the server on file changes.
+- **Clean Repository**: `.gitignore` avoids unnecessary clutter on GitHub.
+
+### 🛠 How to Use
+
+After cloning or switching to this branch, run:
+
+```bash
+npm install
+```
+
+```bash
+npm run dev
+```
+
+Branch: feature/npm
+Status: Ongoing setup and optimization for a smoother development environment.
+
 ## Acknowledgments
 
 This project was created as a learning exercise to understand the fundamentals of Node.js without relying on external frameworks — focusing purely on core concepts.
 
-Built by **Tuanthong Vaidyanond**  
+Built by **Tuanthong Vaidyanond**
 The foundational concepts and structure are based on the course by [Jonas Schmedtmann](https://codingheroes.io/).
 **Node.js, Express, MongoDB &More**
 
@@ -179,3 +207,7 @@ This project is open for personal and commercial use, but not to be claimed as y
 Crediting the original author is highly appreciated!
 
 ---
+
+```
+
+```
