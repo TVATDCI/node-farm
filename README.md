@@ -191,15 +191,22 @@ npm install
 npm run dev
 ```
 
-Branch: feature/npm
-Status: Ongoing setup and optimization for a smoother development environment.
+Try:
+
+```bash
+git checkout main            # Basic CommonJS
+git checkout feature/basic-nodeJs  # The building from line 1 with comments!
+git checkout feature/modules # Modular CommonJS
+git checkout feature/npm     # npm & dev tools setup
+git checkout feature/es6     # You are here!
+```
 
 ## Acknowledgments
 
 This project was created as a learning exercise to understand the fundamentals of Node.js without relying on external frameworks — focusing purely on core concepts.
 
 Built by **Tuanthong Vaidyanond**
-The foundational concepts and structure are based on the course by [Jonas Schmedtmann](https://codingheroes.io/).
+The foundational concepts and structure are based on the course by [Jonas Schmedtmann](https://jonas.io/).
 **Node.js, Express, MongoDB &More**
 
 © Jonas Schmedtmann
