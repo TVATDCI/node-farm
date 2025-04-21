@@ -1,10 +1,13 @@
+// # IMPORTS: Core & Dependencies
 const fs = require("fs");
 const http = require("http");
 const url = require("url");
 const slugify = require("slugify");
 
+// # IMPORT: Custom Modules
 const replaceTemplate = require("./modules/replaceTemplate");
 
+// # FILE READ: Templates
 const tempOverview = fs.readFileSync(
   `${__dirname}/templates/template-overview.html`,
   "utf-8"
@@ -18,15 +21,20 @@ const tempProduct = fs.readFileSync(
   "utf-8"
 );
 
+// # FILE READ: Data
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
 const productData = JSON.parse(data);
 
+// # SLUGIFY: Generate Product Slugs
 const slugs = productData.map((el) => slugify(el.productName, { lower: true }));
 console.log(slugs);
 
+// # SERVER: Create HTTP Server
 const server = http.createServer((req, res) => {
+  // # ROUTE: Extract Query & Path
   const { query, pathname } = url.parse(req.url, true);
 
+  // # ROUTE: Overview Page
   if (pathname === "/" || pathname === "/overview") {
     res.writeHead(200, { "Content-Type": "text/html" });
 
@@ -36,14 +44,20 @@ const server = http.createServer((req, res) => {
     const productOutput = tempOverview.replace("{%PRODUCT_CARD%}", cardsHtml);
 
     res.end(productOutput);
+
+    // # ROUTE: Product Page
   } else if (pathname === "/product") {
     res.writeHead(200, { "Content-Type": "text/html" });
     const product = productData[query.id];
     const productOutput = replaceTemplate(tempProduct, product);
     res.end(productOutput);
+
+    // # ROUTE: API Endpoint
   } else if (pathname === "/api") {
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(data);
+
+    // # ROUTE: 404 Not Found
   } else {
     res.writeHead(404, {
       "Content-Type": "text/html",
@@ -55,6 +69,7 @@ const server = http.createServer((req, res) => {
   }
 });
 
+// # SERVER: Start Listening
 server.listen(8000, "127.0.0.1", () => {
   console.log("Listening to request on port 8000 💆‍♀️");
 });
