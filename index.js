@@ -1,11 +1,17 @@
 // # IMPORTS: Core & Dependencies
-const fs = require("fs");
-const http = require("http");
-const url = require("url");
-const slugify = require("slugify");
+import fs from "fs";
+import http from "http";
+import url from "url";
+import slugify from "slugify";
+import path from "path";
+import { fileURLToPath } from "url";
 
 // # IMPORT: Custom Modules
-const replaceTemplate = require("./modules/replaceTemplate");
+import replaceTemplate from "./modules/replaceTemplate.js";
+
+// # SETUP: __dirname equivalent in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // # FILE READ: Templates
 const tempOverview = fs.readFileSync(
