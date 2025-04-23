@@ -1,20 +1,25 @@
-module.exports = (temp, product) => {
-  let productOutput = temp.replace(/{%PRODUCTNAME%}/g, product.productName);
-  productOutput = productOutput.replace(/{%IMAGE%}/g, product.image);
-  productOutput = productOutput.replace(/{%FROM%}/g, product.from);
-  productOutput = productOutput.replace(/{%NUTRIENTS%}/g, product.nutrients);
-  productOutput = productOutput.replace(/{%QUANTITY%}/g, product.quantity);
-  productOutput = productOutput.replace(/{%PRICE%}/g, product.price);
-  productOutput = productOutput.replace(
-    /{%DESCRIPTION%}/g,
-    product.description
-  );
-  productOutput = productOutput.replace(/{%ID%}/g, product.id);
+const = replaceTemplate (temp, product) => {
+  let productOutput = temp;
+  const replacements = {
+    PRODUCTNAME: product.productName,
+    IMAGE: product.image,
+    FROM: product.from,
+    NUTRIENTS: product.nutrients,
+    QUANTITY: product.quantity,
+    PRICE: product.price,
+    DESCRIPTION: product.description,
+    ID: product.id,
+  },
 
-  if (!product.organic) {
-    productOutput = productOutput.replace(/{%NOT_ORGANIC%}/g, "not-organic");
-  }
+    for (const [key, value] of Object.entries(replacements)) {
+    productOutput = productOutput.replaceAll(`{%{key}%}`, value);
+    }
 
-  return productOutput;
+    if (product.organic) {
+      productOutput = productOutput.replace("{%NOT_ORGANIC%}", "not-organic");
+    }
+
+    return productOutput;
 };
-//
+
+export default replaceTemplate;
