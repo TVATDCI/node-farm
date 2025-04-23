@@ -144,7 +144,8 @@ git checkout feature/es6     # modern ES6
 git checkout feature/async-await  # I am here!
 ```
 
-Future plans like `feature/slugs`, `feature/db`, is in consideration. At the mean time, i am also looking for a job ![alt text](image.png)
+Future plans like `feature/slugs`, `feature/db`, is in consideration.
+At the mean time, i am also looking for a job 😏
 Or "internship" to keep practicing and progressing my skills!
 
 Thank you for smiling!
