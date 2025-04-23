@@ -1,74 +1,91 @@
 // # IMPORTS: Core & Dependencies
-const fs = require("fs");
-const http = require("http");
-const url = require("url");
-const slugify = require("slugify");
+import http from "http";
+import path from "path";
+import { fileURLToPath } from "url";
+import { promises as fs } from "fs";
+import url from "url";
+import slugify from "slugify";
 
-// # IMPORT: Custom Modules
-const replaceTemplate = require("./modules/replaceTemplate");
+// # import local modules
+import replaceTemplate from "./modules/replaceTemplate.js";
 
-// # FILE READ: Templates
-const tempOverview = fs.readFileSync(
-  `${__dirname}/templates/template-overview.html`,
-  "utf-8"
-);
-const tempCard = fs.readFileSync(
-  `${__dirname}/templates/template-card.html`,
-  "utf-8"
-);
-const tempProduct = fs.readFileSync(
-  `${__dirname}/templates/template-product.html`,
-  "utf-8"
-);
-// # FILE READ: Data
-const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
-const productData = JSON.parse(data);
+// # Setup __dirname in ES Modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// # SLUGIFY: Generate Product Slugs
-const slugs = productData.map((el) => slugify(el.productName, { lower: true }));
-console.log(slugs);
+// # Async init to load templates & data
+let tempOverview, tempCard, tempProduct, productData;
 
-// # SERVER: Create HTTP Server
-const server = http.createServer((req, res) => {
-  // # ROUTE: Extract Query & Path
-  const { query, pathname } = url.parse(req.url, true);
-
-  // # ROUTE: Overview Page
-  if (pathname === "/" || pathname === "/overview") {
-    res.writeHead(200, { "Content-Type": "text/html" });
-
-    const cardsHtml = productData
-      .map((el) => replaceTemplate(tempCard, el))
-      .join("");
-    const productOutput = tempOverview.replace("{%PRODUCT_CARD%}", cardsHtml);
-
-    res.end(productOutput);
-
-    // # ROUTE: Product Page
-  } else if (pathname === "/product") {
-    res.writeHead(200, { "Content-Type": "text/html" });
-    const product = productData[query.id];
-    const productOutput = replaceTemplate(tempProduct, product);
-    res.end(productOutput);
-
-    // # ROUTE: API Endpoint
-  } else if (pathname === "/api") {
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(data);
-
-    // # ROUTE: 404 Not Found
-  } else {
-    res.writeHead(404, {
-      "Content-Type": "text/html",
-      "header-name": "hello-world-this-is-my-own-header",
-    });
-    res.end(
-      "<h1>404 Page not found!</h1><p>By setting the content-type as text-html, you can add respond directly in html.</p><p>Inspect the page for all information for status, header-name and Header-content etc;.</p>"
+const init = async () => {
+  try {
+    // # Read HTML templates
+    tempOverview = await fs.readFile(
+      `${__dirname}/templates/template-overview.html`,
+      "utf-8"
     );
-  }
-});
+    tempCard = await fs.readFile(
+      `${__dirname}/templates/template-card.html`,
+      "utf-8"
+    );
+    tempProduct = await fs.readFile(
+      `${__dirname}/templates/template-product.html`,
+      "utf-8"
+    );
 
-// # SERVER: Start Listening
-server.listen(8000, "127.0.0.1", () => {
-  console.log("Listening to request on port 8000 💆‍♀️");
+    // # Read and parse JSON data
+    const data = await fs.readFile(`${__dirname}/dev-data/data.json`, "utf-8");
+    productData = JSON.parse(data);
+
+    // # Create slugs (optional debug)
+    const slugs = productData.map((el) =>
+      slugify(el.productName, { lower: true })
+    );
+    console.log("Slugs:", slugs);
+  } catch (err) {
+    console.error("Failed to initialize templates or data:", err);
+  }
+};
+
+// # Start server only after init
+init().then(() => {
+  const server = http.createServer(async (req, res) => {
+    const { pathname, query } = url.parse(req.url, true);
+
+    try {
+      // # Overview Page
+      if (pathname === "/" || pathname === "/overview") {
+        const cardsHtml = productData
+          .map((product) => replaceTemplate(tempCard, product))
+          .join("");
+        const output = tempOverview.replace("{%PRODUCT_CARD%}", cardsHtml);
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(output);
+
+        // # Product Page
+      } else if (pathname === "/product") {
+        const product = productData[query.id];
+        const output = replaceTemplate(tempProduct, product);
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(output);
+
+        // # API
+      } else if (pathname === "/api") {
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(productData));
+
+        // # 404 Not Found
+      } else {
+        res.writeHead(404, { "Content-Type": "text/html" });
+        res.end("<h1>404 - Page not found</h1>");
+      }
+    } catch (err) {
+      res.writeHead(500, { "Content-Type": "text/html" });
+      res.end("<h1>500 - Internal Server Error</h1>");
+      console.error("Request handling error:", err);
+    }
+  });
+
+  server.listen(8000, "127.0.0.1", () => {
+    console.log("🚀 Server listening on port 8000");
+  });
 });
