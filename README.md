@@ -1,9 +1,11 @@
 # Node-farm Async/Await ES6 Version
 
+<p align="center">
 <img src="./assets/js.svg" alt="JavaScript Logo" width="50" />
 <img src="./assets/node-js.svg" alt="NodeJs Logo" width="50" style="margin-left: 5px;"/>
 <img src="./assets/html-5.svg" alt="HTML-5 Logo" width="50" style="margin-left: 5px;"/>
 <img src="./assets/css-3.svg" alt="CSS-3 Logo" width="50" style="margin-left: 5px;"/>
+</p>
 
 <p align="center">
 <img src="./assets/green-ani.svg" alt="About me" width="50" align="left" style="margin-right: 5px;"/>
