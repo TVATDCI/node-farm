@@ -73,7 +73,7 @@ init().then(() => {
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify(productData));
 
-        // #404 Not Found
+        // # 404 Not Found
       } else {
         res.writeHead(404, { "Content-Type": "text/html" });
         res.end("<h1>404 - Page not found</h1>");
