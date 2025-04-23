@@ -1,4 +1,4 @@
-const = replaceTemplate (temp, product) => {
+const replaceTemplate = (temp, product) => {
   let productOutput = temp;
   const replacements = {
     PRODUCTNAME: product.productName,
@@ -9,17 +9,19 @@ const = replaceTemplate (temp, product) => {
     PRICE: product.price,
     DESCRIPTION: product.description,
     ID: product.id,
-  },
+  };
 
-    for (const [key, value] of Object.entries(replacements)) {
-    productOutput = productOutput.replaceAll(`{%{key}%}`, value);
-    }
+  for (const [key, value] of Object.entries(replacements)) {
+    productOutput = productOutput.replaceAll(`{%${key}%}`, value);
+  }
 
-    if (product.organic) {
-      productOutput = productOutput.replace("{%NOT_ORGANIC%}", "not-organic");
-    }
+  if (product.organic) {
+    productOutput = productOutput.replace("{%NOT_ORGANIC%}", "");
+  } else {
+    productOutput = productOutput.replace("{%NOT_ORGANIC%}", "not-organic");
+  }
 
-    return productOutput;
+  return productOutput;
 };
 
 export default replaceTemplate;
