@@ -8,10 +8,10 @@ This is the **async/await-enhanced version** of the Node.js project "Node-farm",
 
 This version takes the clean, modular ES6 setup and:
 
-- ✅ Refactors all `fs.readFileSync` calls to **asynchronous `fs.promises.readFile`**
-- ✅ Uses `async/await` and `Promise.all()` for concurrent template reading
-- ✅ Wraps server startup in a `try/catch` block for improved **error safety**
-- ✅ Retains clean **routing**, **templating**, and **slugify** logic
+- Refactors all `fs.readFileSync` calls to **asynchronous `fs.promises.readFile`**
+- Uses `async/await` and `Promise.all()` for concurrent template reading
+- Wraps server startup in a `try/catch` block for improved **error safety**
+- Retains clean **routing**, **templating**, and **slugify** logic
 
 ---
 
@@ -44,7 +44,7 @@ node-farm/
 │
 ├── index.mjs                    # Main server using ES6
 ├── package.json                 # Project metadata & config
-└── README.md                    # You’re here 😄
+└── README.md                    # You’re here 😜
 ```
 
 ---
@@ -76,7 +76,7 @@ node-farm/
 
 ### Prerequisites
 
-- Install [Node.js](https://nodejs.org/) (v14+ recommended)
+- Install [Node.js](https://nodejs.org/) (I'm using v18)
 
 ### Run the Server
 
@@ -92,7 +92,7 @@ git checkout feature/es6
 npm install
 
 # Run with native node
-node index.mjs
+node index.js
 ```
 
 Visit:
@@ -144,4 +144,7 @@ git checkout feature/es6     # modern ES6
 git checkout feature/async-await  # I am here!
 ```
 
-Future plans like `feature/slugs`, `feature/db`, is in consideration. At the mean time, i am also looking for a job. Or "internship" to keep practicing and progressing my skills!
+Future plans like `feature/slugs`, `feature/db`, is in consideration. At the mean time, i am also looking for a job ![alt text](image.png)
+Or "internship" to keep practicing and progressing my skills!
+
+Thank you for smiling!
