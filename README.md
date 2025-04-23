@@ -1,4 +1,10 @@
-# Node-farm (Async/Await ES6 Version)
+# Node-farm Async/Await ES6 Version
+
+<img src="./assets/js.svg" alt="JavaScript Logo" width="50" />
+
+<p align="center">
+<img src="./assets/green-ani.svg" alt="About me" width="50" align="left" style="margin-right: 5px;"/>
+</p>
 
 This is the **async/await-enhanced version** of the Node.js project "Node-farm", continuing from the `feature/es6` branch. It builds upon modern **ES6 module syntax** while integrating **async/await patterns** to improve readability, performance, and error handling.
 
