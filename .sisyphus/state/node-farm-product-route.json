@@ -1,0 +1,19 @@
+{
+  "active_plan": ".sisyphus/plans/node-farm-product-route.md",
+  "started_at": "2026-05-05T10:30:00Z",
+  "plan_name": "node-farm-product-route",
+  "project_root": "/home/vladi/projects/GitHub/node-farm",
+  "state_version": "1.3.0",
+  "workflow_stage": "completed",
+  "pending_gate": null,
+  "approval_status": "approved",
+  "gate_history": [
+    {"gate": "checkpoint_1", "status": "approved", "timestamp": "2026-05-05T10:30:00Z"},
+    {"gate": "checkpoint_2", "status": "approved", "timestamp": "2026-05-05T10:30:00Z"},
+    {"gate": "plan_approval", "status": "approved", "timestamp": "2026-05-05T10:30:00Z"},
+    {"gate": "execution_complete", "status": "completed", "timestamp": "2026-05-05T10:45:00Z"}
+  ],
+  "retry_counts": {},
+  "current_wave": 2,
+  "completed_slices": ["task-1-1", "task-1-2", "task-2-1", "task-2-2", "task-3-1"]
+}
